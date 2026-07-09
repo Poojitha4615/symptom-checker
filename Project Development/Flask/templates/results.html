@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Results — Symptom Checker{% endblock %}
+{% block content %}
+<section class="results">
+
+  <div class="urgency-banner urgency-{{ highest_urgency }}">
+    <span class="urgency-dot" aria-hidden="true"></span>
+    <div>
+      <strong>Urgency level: {{ highest_urgency|capitalize }}</strong>
+      <p>{{ highest_urgency_label }}</p>
+    </div>
+  </div>
+
+  <p class="you-said">You said: <em>"{{ user_text }}"</em></p>
+
+  {% if extracted_symptoms %}
+  <p class="detected-symptoms">
+    Detected symptoms:
+    {% for s in extracted_symptoms %}<span class="symptom-tag">{{ s }}</span>{% endfor %}
+  </p>
+  {% endif %}
+
+  {% if matches %}
+    <h2>Possible conditions</h2>
+    <div class="match-list">
+      {% for m in matches %}
+      <article class="match-card urgency-border-{{ m.disease.urgency }}">
+        <div class="match-card-header">
+          <h3>{{ m.disease.name }}</h3>
+          <span class="match-score">{{ (m.score * 100) | round | int }}% symptom overlap</span>
+        </div>
+        <p class="matched-symptoms">Matched: {{ m.matched_symptoms | join(", ") }}</p>
+        <p class="advice">{{ m.disease.advice }}</p>
+        <span class="urgency-pill urgency-pill-{{ m.disease.urgency }}">{{ m.disease.urgency|capitalize }} urgency</span>
+      </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="no-matches">I couldn't confidently match those symptoms to a known condition in my dataset. If you're concerned, please consult a healthcare professional.</p>
+  {% endif %}
+
+  <a href="{{ url_for('index') }}" class="try-again">← Check different symptoms</a>
+</section>
+{% endblock %}

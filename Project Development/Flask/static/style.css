@@ -1,0 +1,203 @@
+:root {
+  --ink: #16242A;
+  --paper: #F6F8F7;
+  --teal-deep: #12494E;
+  --teal: #1F6B6E;
+  --teal-soft: #DCEBEA;
+  --coral: #C1443C;
+  --amber: #B8791A;
+  --line: #D6E0DE;
+
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.pulse-line {
+  width: 100%;
+  height: 28px;
+  overflow: hidden;
+  background: var(--teal-deep);
+}
+.pulse-line svg { width: 100%; height: 100%; }
+.pulse-line polyline { fill: none; stroke: #6FCFCB; stroke-width: 2; opacity: 0.7; }
+
+.site-header {
+  background: var(--teal-deep);
+  color: #EFF6F5;
+  padding: 20px 32px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #A9CFCC;
+  text-transform: uppercase;
+}
+
+main { max-width: 720px; margin: 0 auto; padding: 56px 24px 48px; }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin: 0 0 12px;
+  color: var(--teal-deep);
+}
+.hero-sub { font-size: 1.05rem; color: #445; max-width: 520px; margin-bottom: 32px; }
+
+.symptom-form { display: flex; flex-direction: column; gap: 12px; }
+.symptom-form label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--teal-deep);
+}
+.symptom-form textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  resize: vertical;
+}
+.symptom-form textarea:focus { outline: 3px solid var(--teal-soft); border-color: var(--teal); }
+.symptom-form button {
+  align-self: flex-start;
+  background: var(--teal-deep);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.symptom-form button:hover { background: var(--teal); }
+.symptom-form button:focus-visible { outline: 3px solid var(--coral); }
+
+.form-error { color: var(--coral); font-weight: 500; }
+
+.examples { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.examples-label { font-family: var(--font-mono); font-size: 0.75rem; color: #789; text-transform: uppercase; }
+.example-chip {
+  background: var(--teal-soft);
+  border: none;
+  color: var(--teal-deep);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.example-chip:hover { background: #c9e2e0; }
+
+.urgency-banner { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 12px; margin-bottom: 24px; }
+.urgency-banner p { margin: 2px 0 0; font-size: 0.92rem; }
+.urgency-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+.urgency-low { background: #E4F1E7; color: #1F5C34; }
+.urgency-low .urgency-dot { background: #3C9D5C; }
+.urgency-medium { background: #FBF1DE; color: #7A5410; }
+.urgency-medium .urgency-dot { background: var(--amber); }
+.urgency-high { background: #FBE7E4; color: #8A2B23; }
+.urgency-high .urgency-dot { background: #D9583F; }
+.urgency-emergency { background: #F7DCDA; color: #7A1610; }
+.urgency-emergency .urgency-dot { background: var(--coral); animation: blink 1.2s infinite; }
+
+@keyframes blink { 50% { opacity: 0.3; } }
+
+.you-said { color: #556; font-size: 0.95rem; }
+.detected-symptoms { font-size: 0.9rem; color: #445; margin-bottom: 24px; }
+.symptom-tag {
+  display: inline-block;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin: 3px 4px 0 0;
+}
+
+.results h2 { font-family: var(--font-display); font-size: 1.4rem; color: var(--teal-deep); margin: 32px 0 16px; }
+
+.match-list { display: flex; flex-direction: column; gap: 14px; }
+.match-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teal);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.match-card.urgency-border-emergency { border-left-color: var(--coral); }
+.match-card.urgency-border-high { border-left-color: #D9583F; }
+.match-card.urgency-border-medium { border-left-color: var(--amber); }
+
+.match-card-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.match-card h3 { font-family: var(--font-display); font-size: 1.15rem; margin: 0; }
+.match-score { font-family: var(--font-mono); font-size: 0.78rem; color: #789; }
+.matched-symptoms { font-size: 0.88rem; color: #556; margin: 6px 0; }
+.advice { font-size: 0.92rem; margin: 8px 0; }
+
+.urgency-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.urgency-pill-low { background: #E4F1E7; color: #1F5C34; }
+.urgency-pill-medium { background: #FBF1DE; color: #7A5410; }
+.urgency-pill-high { background: #FBE7E4; color: #8A2B23; }
+.urgency-pill-emergency { background: #F7DCDA; color: #7A1610; }
+
+.no-matches { color: #556; }
+
+.try-again { display: inline-block; margin-top: 32px; color: var(--teal-deep); text-decoration: none; font-weight: 500; }
+.try-again:hover { text-decoration: underline; }
+
+.site-footer { max-width: 720px; margin: 0 auto; padding: 0 24px 40px; font-size: 0.8rem; color: #789; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.9rem; }
+  main { padding: 32px 16px; }
+}

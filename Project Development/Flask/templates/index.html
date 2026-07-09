@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Symptom Checker{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Tell me what you're feeling.</h1>
+  <p class="hero-sub">Describe your symptoms in your own words — I'll match them against common conditions and let you know how urgently to seek care.</p>
+
+  {% if error %}
+    <p class="form-error">{{ error }}</p>
+  {% endif %}
+
+  <form action="{{ url_for('check') }}" method="post" class="symptom-form">
+    <label for="symptoms">Your symptoms</label>
+    <textarea
+      id="symptoms"
+      name="symptoms"
+      rows="4"
+      placeholder="e.g. I have a pounding headache, feel dizzy, and I'm sensitive to light"
+      required
+    ></textarea>
+    <button type="submit">Check symptoms</button>
+  </form>
+
+  <div class="examples">
+    <span class="examples-label">Try:</span>
+    <button type="button" class="example-chip" data-text="fever, cough, and chills">fever, cough, and chills</button>
+    <button type="button" class="example-chip" data-text="tummy ache, throwing up, and diarrhea">tummy ache, throwing up, diarrhea</button>
+    <button type="button" class="example-chip" data-text="chest pain and shortness of breath">chest pain, shortness of breath</button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".example-chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      document.getElementById("symptoms").value = chip.dataset.text;
+    });
+  });
+</script>
+{% endblock %}
